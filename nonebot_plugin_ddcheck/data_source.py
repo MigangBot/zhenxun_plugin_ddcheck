@@ -4,15 +4,10 @@ import httpx
 import jinja2
 from pathlib import Path
 from typing import List, Union
-from nonebot import get_driver
-from nonebot.log import logger
+from services.log import logger
 from nonebot_plugin_apscheduler import scheduler
-from nonebot_plugin_htmlrender import html_to_pic
-
-
-from .config import Config
-
-dd_config = Config.parse_obj(get_driver().config.dict())
+from utils.migang.http import html_to_pic
+from configs.config import Config
 
 data_path = Path("data/ddcheck")
 vtb_list_path = data_path / "vtb_list.json"
@@ -118,7 +113,7 @@ async def get_medals(uid: int) -> List[dict]:
     try:
         url = "https://api.live.bilibili.com/xlive/web-ucenter/user/MedalWall"
         params = {"target_id": uid}
-        headers = {"cookie": dd_config.bilibili_cookie}
+        headers = {"cookie": Config.get_config("zhenxun_plugin_ddcheck", "BILIBILI_COOKIE")}
         async with httpx.AsyncClient() as client:
             resp = await client.get(url, params=params, headers=headers)
             result = resp.json()
