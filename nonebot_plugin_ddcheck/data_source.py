@@ -117,8 +117,9 @@ async def get_medals(uid: int) -> List[dict]:
         async with httpx.AsyncClient() as client:
             resp = await client.get(url, params=params, headers=headers)
             result = resp.json()
+            if result["code"] == -101:
+                return []
             return result["data"]["list"]
-        return []
     except (KeyError, IndexError, httpx.TimeoutException) as e:
         logger.warning(f"Error in get_medals({uid}): {e}")
         return []
