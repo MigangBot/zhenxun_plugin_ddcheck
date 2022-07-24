@@ -40,7 +40,7 @@ __plugin_settings__ = {
     "level": 5,
     "default_status": True,
     "limit_superuser": False,
-    "cmd": ["查成分 {用户名/UID}"],
+    "cmd": [],
 }
 __plugin_configs__ = {
     "BILIBILI_COOKIE": {
