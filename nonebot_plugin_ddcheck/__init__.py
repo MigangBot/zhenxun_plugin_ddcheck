@@ -10,17 +10,17 @@ require("nonebot_plugin_apscheduler")
 
 from .data_source import get_reply
 
-__plugin_meta__ = PluginMetadata(
-    name="成分姬",
-    description="查询B站用户关注的VTuber成分",
-    usage="查成分 B站用户名/UID",
-    extra={
-        "unique_name": "ddcheck",
-        "example": "查成分 小南莓Official",
-        "author": "meetwq <meetwq@gmail.com>",
-        "version": "0.1.11",
-    },
-)
+# __plugin_meta__ = PluginMetadata(
+#     name="成分姬",
+#     description="查询B站用户关注的VTuber成分",
+#     usage="查成分 B站用户名/UID",
+#     extra={
+#         "unique_name": "ddcheck",
+#         "example": "查成分 小南莓Official",
+#         "author": "meetwq <meetwq@gmail.com>",
+#         "version": "0.1.11",
+#     },
+# )
 
 __zx_plugin_name__ = "成分姬"
 __plugin_usage__ = """
