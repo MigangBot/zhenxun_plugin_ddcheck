@@ -18,7 +18,7 @@ from .data_source import get_reply
 #         "unique_name": "ddcheck",
 #         "example": "查成分 小南莓Official",
 #         "author": "meetwq <meetwq@gmail.com>",
-#         "version": "0.1.11",
+#         "version": "0.1.12",
 #     },
 # )
 
