@@ -83,7 +83,7 @@ async def get_uid_by_name(name: str) -> int:
     try:
         url = "http://api.bilibili.com/x/web-interface/search/type"
         params = {"search_type": "bili_user", "keyword": name}
-        headers = {"cookie": dd_config.bilibili_cookie}
+        headers = {"cookie": Config.get_config("zhenxun_plugin_ddcheck", "BILIBILI_COOKIE")}
         async with httpx.AsyncClient(timeout=10) as client:
             await client.get("https://www.bilibili.com", headers=headers)
             resp = await client.get(url, params=params)
