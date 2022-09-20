@@ -83,9 +83,14 @@ async def get_uid_by_name(name: str) -> int:
     try:
         url = "http://api.bilibili.com/x/web-interface/search/type"
         params = {"search_type": "bili_user", "keyword": name}
-        headers = {"cookie": Config.get_config("zhenxun_plugin_ddcheck", "BILIBILI_COOKIE")}
+        headers = {
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.33"
+        }
         async with httpx.AsyncClient(timeout=10) as client:
-            resp = await client.get(url, params=params, headers=headers)
+            resp = await client.head("https://www.bilibili.com", headers=headers)
+            resp = await client.get(
+                url, params=params, cookies=resp.cookies, headers=headers
+            )
             result = resp.json()
             for user in result["data"]["result"]:
                 if user["uname"] == name:
@@ -113,7 +118,9 @@ async def get_medals(uid: int) -> List[dict]:
     try:
         url = "https://api.live.bilibili.com/xlive/web-ucenter/user/MedalWall"
         params = {"target_id": uid}
-        headers = {"cookie": Config.get_config("zhenxun_plugin_ddcheck", "BILIBILI_COOKIE")}
+        headers = {
+            "cookie": Config.get_config("zhenxun_plugin_ddcheck", "BILIBILI_COOKIE")
+        }
         async with httpx.AsyncClient(timeout=10) as client:
             resp = await client.get(url, params=params, headers=headers)
             result = resp.json()
